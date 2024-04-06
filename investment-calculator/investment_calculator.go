@@ -7,18 +7,27 @@ import (
 
 // it is common to import packages like this :)
 
-
 func main() {
-	var investmenrAmount float64 = 1000
-	expectedReturnRate := 5.5 //Decleare or assign a variable where type should be infered 
-	var years float64 = 10
-	// variable declariton can be on the same line 
-	// i.e var investmentAmount, years float64 = 1000, 10
-	// i don't like that though I think its silly.
+
+	const inflationRate = 3.8
+
+	var investmenrAmount float64 
+	var expectedReturnRate float64
+	var years float64
+
+
+	fmt.Print("Pleas input your investment amount: ")
+	fmt.Scan(&investmenrAmount) //  this is pointer we'll come back to these
+
+	fmt.Print("Please input your expected retrun rate: ")
+	fmt.Scan(&expectedReturnRate) // fmt.Scan has limitaions
+
+	fmt.Print("How long will this investment be for (in years): ")
+	fmt.Scan(&years)
 
 	
-	//since go is hard static types all the variables in this need to be of the same type 
-	var futureValue = investmenrAmount * math.Pow(1 + expectedReturnRate / 100, years)
-	
-	fmt.Println(futureValue)
+	futureValue := investmenrAmount * math.Pow(1+expectedReturnRate/100, years)
+	inflationAdjustedValue := futureValue / math.Pow(1+inflationRate/100, years)
+
+	fmt.Println(inflationAdjustedValue)
 }
