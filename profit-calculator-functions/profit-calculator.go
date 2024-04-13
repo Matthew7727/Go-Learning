@@ -14,11 +14,8 @@ const taxRate float64 = 30
 
 func main() {
 
-	var revenue float64
-	var expenses float64
-
-	revenue = outputText("Please input your Revenue: ")
-	expenses = outputText("Please input your Total Expenses: ")
+	revenue := outputText("Please input your Revenue: ")
+	expenses := outputText("Please input your Total Expenses: ")
 
 	preTaxProfit, postTaxProfit := calculateProfits(revenue, expenses)
 
