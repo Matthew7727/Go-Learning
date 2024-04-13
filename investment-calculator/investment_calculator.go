@@ -15,8 +15,7 @@ func main() {
 	var expectedReturnRate float64
 	var years float64
 
-
-	fmt.Print("Pleas input your investment amount: ")
+	outputText("Pleas input your investment amount: ")
 	fmt.Scan(&investmenrAmount) //  this is pointer we'll come back to these
 
 	fmt.Print("Please input your expected retrun rate: ")
@@ -29,5 +28,12 @@ func main() {
 	futureValue := investmenrAmount * math.Pow(1+expectedReturnRate/100, years)
 	inflationAdjustedValue := futureValue / math.Pow(1+inflationRate/100, years)
 
-	fmt.Println(inflationAdjustedValue)
+	formattedFVOutput := fmt.Sprintf("Future Value: $%.2f\n", futureValue)
+
+	formattedAFIOutput :=  fmt.Sprintf("Future Value (adjusted for Inflation): $%.2f\n", inflationAdjustedValue)
+	fmt.Println(formattedFVOutput, formattedAFIOutput)
+}
+
+func outputText(text string) {
+	fmt.Print(text)
 }
