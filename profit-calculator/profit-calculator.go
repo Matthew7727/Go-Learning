@@ -35,8 +35,7 @@ func main() {
 	fmt.Print("Your post tax revenue is: ")
 	fmt.Println(postTaxRevenue)
 
-	fmt.Print("The Ratio is: ")
-	fmt.Println(ratio)
+	fmt.Print("The Ratio is: ", ratio)
 
 
 	
