@@ -21,13 +21,11 @@ func main() {
 
 	ratio := calcuateRatio(preTaxProfit, postTaxProfit)
 
-	fmt.Print("Yor pre tax revenue is: ")
-	fmt.Println(preTaxProfit)
+	fmt.Printf("Yor pre tax revenue is: £%.2f \n ", preTaxProfit)
 
-	fmt.Print("Your post tax revenue is: ")
-	fmt.Println(postTaxProfit)
+	fmt.Printf("Your post tax revenue is: £%.2f \n ", postTaxProfit)
 
-	fmt.Printf("The Ratio is: %.2f ", ratio)
+	fmt.Printf("The Ratio is: %.2f \n", ratio)
 
 }
 
