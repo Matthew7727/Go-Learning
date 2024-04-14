@@ -1,6 +1,25 @@
 package main
 
-import "fmt"
+import ( 
+	"fmt"
+	"os"
+	"strconv"
+)
+
+const FILE_NAME string = "balance.txt"
+
+func writeBalanceToFile(balance float64) {
+	balanceTxt := fmt.Sprint(balance)
+	os.WriteFile(FILE_NAME, []byte(balanceTxt), 0644)
+}
+
+func readBalanceFromFile() (float64) {
+	data, _ := os.ReadFile(FILE_NAME)
+	balanceTxt := string(data)
+	floatBalance, _ := strconv.ParseFloat(balanceTxt, 64)
+	
+	return floatBalance 
+}
 
 func main() {
 	for {
@@ -12,7 +31,7 @@ func main() {
 		fmt.Println("4. Exit")
 
 		var choice int
-		var balance float64 = 10000
+		var balance float64 = readBalanceFromFile()
 
 		fmt.Print("Your choice: ")
 		fmt.Scan(&choice)
@@ -30,6 +49,7 @@ func main() {
 				continue // this doens't just stop this else statment it stops all code from being exexcuted from that point
 			}
 			balance += float64(money)
+			writeBalanceToFile(balance)
 			fmt.Printf("Your new balance is: £%.2f \n", balance)
 		case 3:
 			var money int
@@ -44,6 +64,7 @@ func main() {
 				continue
 			}
 			balance -= float64(money)
+			writeBalanceToFile(balance)
 			fmt.Printf("Your new balance is: £%.2f \n", balance)
 		default:
 			fmt.Println("Goodbye")
