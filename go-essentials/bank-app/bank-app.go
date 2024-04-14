@@ -16,10 +16,12 @@ func main() {
 
 		fmt.Print("Your choice: ")
 		fmt.Scan(&choice)
+		
 
-		if choice == 1 {
+		switch choice {
+		case 1:
 			fmt.Printf("Your balance is: £%.2f \n", balance)
-		} else if choice == 2 {
+		case 2:
 			var money int
 			fmt.Print("Your deposit: £")
 			fmt.Scan(&money)
@@ -29,7 +31,7 @@ func main() {
 			}
 			balance += float64(money)
 			fmt.Printf("Your new balance is: £%.2f \n", balance)
-		} else if choice == 3 {
+		case 3:
 			var money int
 			fmt.Print("Your withdrawal: £")
 			fmt.Scan(&money)
@@ -43,10 +45,10 @@ func main() {
 			}
 			balance -= float64(money)
 			fmt.Printf("Your new balance is: £%.2f \n", balance)
-		} else {
+		default:
 			fmt.Println("Goodbye")
-			break
+			fmt.Println("Thank for choosing our bank!")
+			return
 		}
 	}
-	fmt.Println("Thank for choosing our bank!")
 }
