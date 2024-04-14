@@ -3,6 +3,10 @@
 // CLI Tool in Go
 // Ask User for Renvue, Expenses and Tax Rate
 // Calualates Earning Before Tax and Earings After Tax and ratio of the two
+// Validates User Input
+// - No Negative Numbers
+// - Not 0 
+// Stores Resutls into a file
 
 package main
 

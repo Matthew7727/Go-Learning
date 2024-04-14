@@ -1,6 +1,7 @@
 package main
 
-import ( 
+import (
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
@@ -13,12 +14,21 @@ func writeBalanceToFile(balance float64) {
 	os.WriteFile(FILE_NAME, []byte(balanceTxt), 0644)
 }
 
-func readBalanceFromFile() (float64) {
-	data, _ := os.ReadFile(FILE_NAME)
+func readBalanceFromFile() (float64, error) {
+	data, err := os.ReadFile(FILE_NAME)
+
+	if err != nil {
+		return 10000, errors.New("the balance could not be found")
+	}
+
 	balanceTxt := string(data)
-	floatBalance, _ := strconv.ParseFloat(balanceTxt, 64)
+	floatBalance, err := strconv.ParseFloat(balanceTxt, 64)
+
+	if err != nil {
+		return 10000, errors.New("your Balance could not be read")
+	}
 	
-	return floatBalance 
+	return floatBalance, nil 
 }
 
 func main() {
@@ -31,7 +41,14 @@ func main() {
 		fmt.Println("4. Exit")
 
 		var choice int
-		var balance float64 = readBalanceFromFile()
+		balance , err  := readBalanceFromFile()
+
+		if err != nil {
+			fmt.Println("ERROR")
+			fmt.Println(err)
+			fmt.Println("===============")
+			panic("Ended in a panic")
+		}
 
 		fmt.Print("Your choice: ")
 		fmt.Scan(&choice)
