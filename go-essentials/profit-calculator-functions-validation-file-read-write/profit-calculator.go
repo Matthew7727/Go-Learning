@@ -19,13 +19,13 @@ const taxRate float64 = 30
 
 func main() {
 
-	revenue, err := getUserInput("Please input your Revenue: ")
-	if err != nil {
+	revenue, RevErr := getUserInput("Please input your Revenue: ")
+	if RevErr != nil {
 		panic("Error with revenue input")
 	}
 
-	expenses, err := getUserInput("Please input your Total Expenses: ")
-	if err != nil {
+	expenses, ExpErr := getUserInput("Please input your Total Expenses: ")
+	if ExpErr != nil {
 		panic("Error with expenese input")
 	}
 	preTaxProfit, postTaxProfit := calculateProfits(revenue, expenses)
