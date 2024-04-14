@@ -41,7 +41,7 @@ func main() {
 }
 
 func saveToFile(preTax float64, postTax float64, ratio float64) {
-	stringToWrite := fmt.Sprintf("The Pre Tax Proft was: £%.2f. The Post Tax Proft was: £%.2f with a ratio of %.2f", preTax, postTax, ratio)
+	stringToWrite := fmt.Sprintf("The Pre Tax Proft was: £%.2f. \n The Post Tax Proft was: £%.2f \n with a ratio of %.2f", preTax, postTax, ratio)
 	os.WriteFile("Profts.txt", []byte(stringToWrite), 0644)
 }
 
