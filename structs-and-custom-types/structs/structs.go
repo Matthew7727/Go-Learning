@@ -17,9 +17,14 @@ func main() {
 	lastName := getUserData("Please enter your last name: ")
 	birthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	
+	var appUser = user{
+		firstName: firstName,
+		lastName: lastName,
+		birthDate: birthdate,
+		createdAt: time.Now(),
+	}
 
-	fmt.Println(firstName, lastName, birthdate)
+	outputUserDetails(&appUser)
 }
 
 func getUserData(promptText string) string {
@@ -27,4 +32,11 @@ func getUserData(promptText string) string {
 	var value string
 	fmt.Scan(&value)
 	return value
+}
+
+func outputUserDetails(u *user) {
+	fmt.Println(u.firstName)
+	fmt.Println(u.lastName)
+	fmt.Println(u.birthDate)
+	fmt.Println(u.createdAt)
 }
