@@ -13,6 +13,12 @@ type User struct {
 	createdAt time.Time
 }
 
+type Admin struct {
+	email string
+	password string
+	User
+} 
+
 func (u User) OutputUserDetails() {
 	fmt.Println(u.firstName, u.lastName, u.birthDate, u.createdAt)
 }
@@ -22,7 +28,20 @@ func (u *User) ClearUsername() {
 	u.lastName = ""
 }
 
-func NewUser(firstName, lastName, birthdate string) (*User, error) {
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email: email,
+		password: password,
+		User: User{
+			firstName: "ADMIN",
+			lastName: "ADMIN",
+			birthDate: "---",
+			createdAt: time.Now(),
+		},
+	}
+}
+
+func New(firstName, lastName, birthdate string) (*User, error) {
 
 	if firstName == "" || lastName == "" || birthdate == "" {
 
