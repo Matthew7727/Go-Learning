@@ -46,7 +46,7 @@ func main() {
 
 	prod2 := product{
 		title: "Tablet",
-		id: 4,
+		id: 2,
 		price: 1999.99,
 	}
 
