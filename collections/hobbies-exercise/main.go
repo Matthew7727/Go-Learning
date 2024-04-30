@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 
 	// 1	
-	hobbies := [3]string{"coding", "Apex", "Gym"}
+	hobbies := [3]string{"Coding", "Apex", "Gym"}
 	
 	// 2
 	fmt.Println(hobbies)
@@ -19,7 +19,7 @@ func main() {
 	fmt.Println(hobbiesSlice1, hobbiesSlice2)
 
 	// 4 
-	hobbiesSlice1 = hobbies[1:]
+	hobbiesSlice1 = hobbiesSlice1[1:3]
 	fmt.Println(hobbiesSlice1)
 
 	// 5
