@@ -1,23 +1,23 @@
 package prices
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
-
+	conversion "exapmle.com/practice-cacl/conversion"
+	filemanager "exapmle.com/practice-cacl/file-manager"
 )
 
 type TaxInclPriceJob struct {
 	TaxRate float64
 	InputPrices []float64
-	TaxInclPrices map[string]float64
+	TaxInclPrices map[string]string
+	IOManager filemanager.FileManger
 }
 
-func NewTaxInclPriceJob(taxRate float64) *TaxInclPriceJob {
+func NewTaxInclPriceJob(fm filemanager.FileManger, taxRate float64) *TaxInclPriceJob {
 	return &TaxInclPriceJob{
 		InputPrices: []float64{10 ,20 ,30},
 		TaxRate: taxRate,
+		IOManager: fm,
 	}
 }
 
@@ -30,41 +30,25 @@ func (job *TaxInclPriceJob) Process() {
 		result[fmt.Sprintf("%.2f", price)] = fmt.Sprintf("%.2f", taxInclPrice)
 	}
 
+	job.TaxInclPrices = result
+	job.IOManager.WriteJson(job)
+	
 	fmt.Println(result)
 }
 
 func (job *TaxInclPriceJob) LoadData() {
-	file, err := os.Open("prices.txt")
+	lines, err := job.IOManager.ReadLines()
 
 	if err != nil {
-		fmt.Println("Cold not open File")
 		fmt.Println(err)
 		return
 	}
 
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	err = scanner.Err()
+	prices, err := conversion.StringsToFloat(lines)
+
 	if err != nil {
-		fmt.Println("Reading file content failed")
+		fmt.Println("An Error occured during type conversion")
 		fmt.Println(err)
-		file.Close()
-		return
-	}
-
-	prices := make([]float64, len(lines))
-
-	for index, line := range lines{
-		prices[index], err = strconv.ParseFloat(line, 64)
-		if err != nil {
-			fmt.Println("An Error occured during type conversion")
-			fmt.Println(err)
-			file.Close()
-			return
-		}
 	}
 
 	job.InputPrices = prices
