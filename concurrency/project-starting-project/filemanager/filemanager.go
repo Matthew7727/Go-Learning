@@ -7,7 +7,6 @@ import (
 	"os"
 	"time"
 
-	"golang.org/x/tools/go/analysis/passes/defers"
 )
 
 type FileManager struct {
@@ -19,7 +18,7 @@ func (fm FileManager) ReadLines() ([]string, error) {
 	file, err := os.Open(fm.InputFilePath)
 
 	if err != nil {
-		return nil, errors.New("Failed to open file.")
+		return nil, errors.New("failed to open file")
 	}
 
 	defer file.Close()
