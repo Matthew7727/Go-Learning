@@ -60,10 +60,16 @@ func updateEvent(context *gin.Context) {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "stupid request (bad id)"})
 		return
 	}
+	userId := context.GetInt64("userId")
+	event, err := models.GetEventById(id)
 
-	_ , err = models.GetEventById(id)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "stupid request (bad id)"})
+		return
+	}
+
+	if event.UserID != userId {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "not authed to update event"})
 		return
 	}
 
@@ -91,10 +97,15 @@ func deleteEvent(context *gin.Context) {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "stupid request (bad id)"})
 		return
 	}
-
+	userId := context.GetInt64("userId")
 	event , err := models.GetEventById(id)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "stupid request (bad id)"})
+		return
+	}
+	
+	if event.UserID != userId {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "not authed to delete event"})
 		return
 	}
 
